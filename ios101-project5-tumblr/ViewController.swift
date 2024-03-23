@@ -9,7 +9,8 @@ import Nuke
 //Samir - conform to the protocol is to implement a few methods that the data source needs to display the table view
 class ViewController: UIViewController, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 50 //50 rows
+        // return the number of posts we'll be displaying        
+        return posts.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -30,6 +31,10 @@ class ViewController: UIViewController, UITableViewDataSource {
     @IBOutlet weak var tableView: UITableView!
     
     
+    // A property to store the blogs we fetch.
+    private var posts: [Post] = []
+    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.dataSource = self
