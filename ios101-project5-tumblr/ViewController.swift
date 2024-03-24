@@ -32,7 +32,6 @@ class ViewController: UIViewController, UITableViewDataSource {
         
         // Set the text on the labels
         cell.numberLabel.text = post.summary //Samir - I had messed up the naming of these labels but summary does belong to numberLabel
-        cell.summaryLabel.text = post.caption
         
         // Return the cell for use in the respective table view row
         return cell

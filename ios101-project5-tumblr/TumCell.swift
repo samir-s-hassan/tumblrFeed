@@ -12,9 +12,7 @@ class TumCell: UITableViewCell {
     @IBOutlet weak var tumblrPicView: UIImageView!
     
     @IBOutlet weak var numberLabel: UILabel!
-    
-    @IBOutlet weak var summaryLabel: UILabel!
-    
+        
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
