@@ -76,10 +76,13 @@ class ViewController: UIViewController, UITableViewDataSource {
 
             do {
                 let blog = try JSONDecoder().decode(Blog.self, from: data)
-
+                let posts = blog.response.posts //Get the posts from the decoded JSON
+                
                 DispatchQueue.main.async { [weak self] in
-                    let posts = blog.response.posts
 
+                    // Update the posts property so we can access post data anywhere in the view controller.
+                    self?.posts = posts
+                    self?.tableView.reloadData() //also have to reload the data because async requests are slow
 
                     print("✅ We got \(posts.count) posts!")
                     for post in posts {
