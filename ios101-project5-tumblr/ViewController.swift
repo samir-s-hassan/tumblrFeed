@@ -48,11 +48,25 @@ class ViewController: UIViewController, UITableViewDataSource {
     
 
     override func viewDidLoad() {
+        // Step 1: Create a UIRefreshControl instance
+        let refreshControl = UIRefreshControl()
+        
+        // Step 2: Add the UIRefreshControl to the table view
+        tableView.refreshControl = refreshControl
+        
+        // Step 3: Implement a method to handle the refresh action
+        refreshControl.addTarget(self, action: #selector(refreshData(_:)), for: .valueChanged)
+
         super.viewDidLoad()
         tableView.dataSource = self
         fetchPosts()
     }
 
+    // Step 4: Assign the refresh action method to the UIRefreshControl
+    @objc func refreshData(_ sender: Any) {
+        // Perform data fetching or reloading
+        fetchPosts()
+    }
 
 
     func fetchPosts() {
@@ -87,6 +101,11 @@ class ViewController: UIViewController, UITableViewDataSource {
                     for post in posts {
                         print("🍏 Summary: \(post.summary)")
                     }
+                    // Step 5: End refreshing when the data reload is complete
+                    if let refreshControl = self?.tableView.refreshControl, refreshControl.isRefreshing {
+                        refreshControl.endRefreshing()
+                    }
+
                 }
 
             } catch {
