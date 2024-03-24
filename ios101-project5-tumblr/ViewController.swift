@@ -10,23 +10,36 @@ import Nuke
 class ViewController: UIViewController, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // return the number of posts we'll be displaying        
+        print("🍏 numberOfRowsInSection called with posts count: \(posts.count)")
         return posts.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        // Create the cell
-        let cell = UITableViewCell()
+        // Get a reusable cell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "TumCell", for: indexPath) as! TumCell
+                
+        // Get the movie associated table view row
+        let post = posts[indexPath.row]
+        
+        // Configure the cell (i.e., update UI elements like labels, image views, etc.)
+        // Get the first photo in the post's photos array
+        if let photo = post.photos.first {
+              let url = photo.originalSize.url
+              
+            Nuke.loadImage(with: url, into: cell.tumblrPicView)
 
-        // Configure the cell (i.e. update UI elements like labels, image views, etc.)
-        // Get the row where the cell will be placed using the `row` property on the passed in `indexPath` (i.e., `indexPath.row`)
-        cell.textLabel?.text = "Row \(indexPath.row)"
-
+        }
+        
+        // Set the text on the labels
+        cell.numberLabel.text = post.summary //Samir - I had messed up the naming of these labels but summary does belong to numberLabel
+        cell.summaryLabel.text = post.caption
+        
         // Return the cell for use in the respective table view row
         return cell
     }
     
 
-//Samir - add the outlet here before the viewDidLoad()
+//Samir - added the outlet here before the viewDidLoad()
     
     @IBOutlet weak var tableView: UITableView!
     
@@ -65,7 +78,6 @@ class ViewController: UIViewController, UITableViewDataSource {
                 let blog = try JSONDecoder().decode(Blog.self, from: data)
 
                 DispatchQueue.main.async { [weak self] in
-
                     let posts = blog.response.posts
 
 
