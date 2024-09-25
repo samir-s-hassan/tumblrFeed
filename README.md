@@ -32,7 +32,7 @@ N/A
 
 ## Video Walkthrough
 
-[Video](https://www.loom.com/share/8a387f05bc544e13ae6711ae9ebb68c2?sid=0fb7a400-1cf0-457d-b633-d2934623a61c) .
+N/A
 
 ## Notes
 
