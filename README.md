@@ -1,4 +1,4 @@
-# Project 5 - Tumblr
+# Tumblr
 Submitted by: Samir Hassan
 
 Tumblr is an app that fetches a feed of blog posts from the Tumblr API and displays them in a scrolling list via a table view. The app can be easily configured to fetch the blog posts from 
